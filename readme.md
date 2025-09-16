@@ -29,6 +29,7 @@ cd onnxruntime
 # for the repo, i installed it to where the repo was cloned.
 # git/onnxruntime_boilerplate
 make install DESTDIR=[DESTINATION_DIR]
+# example: make install DESTDIR=/fire_simulator/external
 ```
 
 ### Building the code
