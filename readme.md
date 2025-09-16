@@ -20,6 +20,7 @@ brew unlink protobuf
 # unlink or even uninstall these two.
 brew unlink onnx
 brew unlink onnxruntime
+brew install pkg-config
 
 # Build from source
 git clone --recursive https://github.com/Microsoft/onnxruntime.git
