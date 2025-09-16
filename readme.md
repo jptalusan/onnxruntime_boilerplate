@@ -28,8 +28,9 @@ cd onnxruntime
 ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --compile_no_warning_as_error --skip_submodule_sync --cmake_extra_defines CMAKE_OSX_ARCHITECTURES=arm64 --use_vcpkg
 # for the repo, i installed it to where the repo was cloned.
 # git/onnxruntime_boilerplate
+cd build/MacOS/RelWithDebInfo
 make install DESTDIR=[DESTINATION_DIR]
-# example: make install DESTDIR=/fire_simulator/external
+# example: make install DESTDIR=/fire_simulator/external/onnxruntime_install
 ```
 
 ### Building the code
