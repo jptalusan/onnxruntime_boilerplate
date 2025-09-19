@@ -1,6 +1,6 @@
 # ONNX/ONNXRuntime sandbox
 I am trying to understand and create ML models (from sklearn or torch) and call them for, inference, within a c++ pipeline. 
-I am on Python 3.12 running on M3 Pro 15.6.
+I am on Python 3.12.7 running on M3 Pro 15.6.
 
 This will generate 2 models, `torch_train_export` and `generate_models`. You would need to run the corresponding .py files first.  
 Each src file will generate its own program for ease of use.  

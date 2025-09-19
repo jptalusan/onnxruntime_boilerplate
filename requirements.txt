@@ -1,4 +1,4 @@
-torch
-skl2onnx
-scikit-learn
-numpy
+torch~=2.8.0
+skl2onnx~=1.19.1
+scikit-learn~=1.7.0
+numpy~=2.2.5
