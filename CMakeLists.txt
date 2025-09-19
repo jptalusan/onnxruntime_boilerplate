@@ -1,30 +1,45 @@
 cmake_minimum_required(VERSION 3.15)
-project(OnnxInfer CXX)
+project(OnnxInferenceProjects CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Using the brew installation
-# # Detect Homebrew prefix automatically
+file(GLOB SOURCE_FILES "src/*.cpp")
+
+# Detect Homebrew prefix automatically
 # execute_process(
-#     COMMAND brew --prefix onnxruntime
-#     OUTPUT_VARIABLE ONNXRUNTIME_INSTALL_DIR
-#     OUTPUT_STRIP_TRAILING_WHITESPACE
+# COMMAND brew --prefix onnxruntime
+# OUTPUT_VARIABLE ONNXRUNTIME_INSTALL_DIR
+# OUTPUT_STRIP_TRAILING_WHITESPACE
 # )
 
-# Use custom-built ONNX Runtime (installed locally)
+find_package(nlohmann_json REQUIRED)
+
 set(ONNXRUNTIME_INSTALL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/onnxruntime_install/usr/local")
 
-# ORT include and library
 set(ONNXRUNTIME_INCLUDE_DIR "${ONNXRUNTIME_INSTALL_DIR}/include")
 set(ONNXRUNTIME_LIB "${ONNXRUNTIME_INSTALL_DIR}/lib/libonnxruntime.dylib")
 
-add_executable(infer src/infer.cpp)
+foreach(SOURCE_FILE IN LISTS SOURCE_FILES)
+# Get the file name without the path and extension (e.g., "onnx_inference")
+get_filename_component(EXECUTABLE_NAME "${SOURCE_FILE}" NAME_WE)
 
-target_include_directories(infer PRIVATE ${ONNXRUNTIME_INCLUDE_DIR})
-target_link_libraries(infer PRIVATE ${ONNXRUNTIME_LIB})
+# Add an executable for the current source file
+add_executable(${EXECUTABLE_NAME} "${SOURCE_FILE}")
 
-# Make sure the dynamic library can be found at runtime
-set_target_properties(infer PROPERTIES
+# Link the required libraries and include directories to the new executable
+target_include_directories(${EXECUTABLE_NAME} PRIVATE 
+    ${ONNXRUNTIME_INCLUDE_DIR}
+)
+
+target_link_libraries(${EXECUTABLE_NAME} PRIVATE 
+    ${ONNXRUNTIME_LIB}
+    nlohmann_json::nlohmann_json
+)
+
+# Ensure the dynamic library can be found at runtime
+set_target_properties(${EXECUTABLE_NAME} PROPERTIES
     INSTALL_RPATH "${ONNXRUNTIME_INSTALL_DIR}/lib"
 )
+
+endforeach()

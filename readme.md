@@ -2,6 +2,12 @@
 I am trying to understand and create ML models (from sklearn or torch) and call them for, inference, within a c++ pipeline. 
 I am on Python 3.12 running on M3 Pro 15.6.
 
+This will generate 2 models, `torch_train_export` and `generate_models`. You would need to run the corresponding .py files first.  
+Each src file will generate its own program for ease of use.  
+
+`torch_train_export`: Should have examples with one hot encoding and saving the feature map into a json and then ensuring the c++ code uses that to avoid mistakes.
+`generate_models`: Generates simple models for sklearn and torch.
+
 ## Easy Setup
 You can start using `onnxruntime` using the brew installation however, there might some `schema error` warnings that will pop up during use but those can be ignored.
 ```bash
